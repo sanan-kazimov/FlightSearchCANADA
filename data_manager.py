@@ -20,14 +20,21 @@ class DataManager:
         self.destination_data = response.json()
         return self.destination_data
 
-# TODO SOLVE!!! row_id problem. all data appears only on the first row!!!
-    def update_destination_codes(self, row_id):
-        for city in self.destination_data:
+# TODO SOLVE!!! only IATA Code column is updated, rest is being erased
+    def update_destination_codes(self):
+        for row_id, city in enumerate(self.destination_data):
+            print(f'DATA_MANAGER, update_destination_codes, city: {city}')
+
+
             new_data = {
                 "IATA Code": city["IATA Code"]
             }
+            print(f'DATA_MANAGER, update_destination_codes, new_data: {new_data}')
+
+            print(f'DATA_MANAGER, update_destination_codes, row_id: {row_id}')
             response = requests.put(
                 url=f"{SHEET_BEST_ENDPOINT_FLIGHTDEALS}/{row_id}",
                 json=new_data
             )
+
             print(response.text)
