@@ -2,8 +2,8 @@
 
 import os
 import requests
-from flight_data import FlightData
 
+from flight_data import FlightData
 
 # --------------------------------------------------------------------- FLIGHT
 FLIGHT_API_KEY = os.environ["FLIGHT_API_KEY"]
@@ -44,6 +44,7 @@ class FlightSearch:
 
         try:
             data = response.json()["data"][0]
+
         except IndexError:
             print(f"No flights found for {destination_city_code}.")
             return None
@@ -56,4 +57,5 @@ class FlightSearch:
             destination_airport=data["flyTo"],
             out_date=data["local_departure"].split("T")[0]
         )
+
         return flight_data
