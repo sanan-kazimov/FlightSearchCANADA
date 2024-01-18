@@ -4,8 +4,10 @@ import os
 import requests
 
 # ---------------------------------------------------- FLIGHTDEALS SHEET
-SHEET_BEST_ENDPOINT_FLIGHTDEALS = os.environ["SHEET_BEST_ENDPOINT_FLIGHTDEALS"]
-SHEET_BEST_API_KEY_FLIGHTDEALS = os.environ["SHEET_BEST_API_KEY_FLIGHTDEALS"]
+ENDPOINT_FLIGHTDEALS_SHEET = os.environ["SHEET_BEST_ENDPOINT_FLIGHTDEALS"]
+TAB_PRICES_FLIGHTDEALS = "/tabs/prices"
+TAB_USERS_FLIGHTDEALS = "/tabs/users"
+API_KEY_FLIGHTDEALS_SHEET = os.environ["SHEET_BEST_API_KEY_FLIGHTDEALS"]
 
 
 class DataManager:
@@ -14,7 +16,7 @@ class DataManager:
         self.destination_data = {}
 
     def get_destination_data(self):
-        response = requests.get(url=SHEET_BEST_ENDPOINT_FLIGHTDEALS)
+        response = requests.get(url=ENDPOINT_FLIGHTDEALS_SHEET)
         self.destination_data = response.json()
         return self.destination_data
 
@@ -27,7 +29,7 @@ class DataManager:
             }
 
             response = requests.put(
-                url=f"{SHEET_BEST_ENDPOINT_FLIGHTDEALS}/{row_id}",
+                url=f"{ENDPOINT_FLIGHTDEALS_SHEET}/{row_id}",
                 json=new_row
             )
 

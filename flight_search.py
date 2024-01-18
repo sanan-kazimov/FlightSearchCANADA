@@ -2,7 +2,6 @@
 
 import os
 import requests
-
 from flight_data import FlightData
 
 # --------------------------------------------------------------------- FLIGHT
